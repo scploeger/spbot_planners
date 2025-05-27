@@ -45,6 +45,8 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
+install( DIRECTORY bt_xml/
+  DESTINATION share/${PROJECT_NAME}/bt_xml ) 
 
 # ── export plugin description *once* (this also installs the XML
 #    into share/spbot_planners/ and adds the ament index entry) ───────────
