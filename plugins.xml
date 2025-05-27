@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<library path="lib/rrt_star_planner">
+  <class
+    name="spbot_planners::RRTStarPlanner"
+    type="spbot_planners::RRTStarPlanner"
+    base_class_type="nav2_core::GlobalPlanner">
+    <description>
+      RRT* global planner plugin for Nav2
+    </description>
+  </class>
+</library>
