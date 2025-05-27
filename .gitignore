@@ -1,0 +1,45 @@
+# ROS 2 specific
+build/
+install/
+log/
+dev_ws/build/
+dev_ws/install/
+dev_ws/log/
+ament_ws/build/
+ament_ws/install/
+ament_ws/log/
+colcon_ws/build/
+colcon_ws/install/
+colcon_ws/log/
+
+# Compiled files
+*.so
+*.pyc
+*.pyo
+
+# Build artifacts
+**/CMakeCache.txt
+**/CMakeFiles/
+**/*.cmake.in
+**/Makefile
+**/cmake_install.cmake
+**/install_manifest.txt
+**/compile_commands.json
+.catkin_tools/
+.colcon_install_layout
+.colcon_meta/
+.colcon_pid
+.colcon_workspace_change_indicator
+COLCON_IGNORE
+CATKIN_IGNORE
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*~
+*.bak
+
+# Other common ignores
+*.DS_Store
+Thumbs.db
