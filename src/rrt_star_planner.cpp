@@ -44,7 +44,7 @@ void RRTStarPlanner::cleanup()
 }
 
 nav_msgs::msg::Path RRTStarPlanner::createPlan(
-  const geometry_msgs::msg::PoseStamped & start,
+  const geometry_msgs::msg::PoseStamped & start, // two poses, start and goal
   const geometry_msgs::msg::PoseStamped & goal
 )
 {
