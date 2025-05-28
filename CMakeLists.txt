@@ -17,7 +17,24 @@ find_package(nav_msgs REQUIRED)
 add_library(rrt_star_planner SHARED
   src/rrt_star_planner.cpp
 )
+
+add_library(straight_line_planner SHARED
+  src/straight_line_planner.cpp
+)
+
 ament_target_dependencies(rrt_star_planner
+  pluginlib
+  nav2_core
+  nav2_util
+  nav2_costmap_2d
+  rclcpp_lifecycle
+  rclcpp
+  tf2_ros
+  geometry_msgs
+  nav_msgs
+)
+
+ament_target_dependencies(straight_line_planner
   pluginlib
   nav2_core
   nav2_util
@@ -34,8 +51,19 @@ target_include_directories(rrt_star_planner PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
+target_include_directories(straight_line_planner PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 # ── install: library + headers ───────────────────────────────────────────
 install(TARGETS rrt_star_planner
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+install(TARGETS straight_line_planner
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
