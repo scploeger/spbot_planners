@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<library path="rrt_star_planner">
+<library path="straight_line_planner">
   <class
-    name="spbot_planners::RRTStarPlanner"
-    type="spbot_planners::RRTStarPlanner"
+    name="spbot_planners::StraightLinePlanner"
+    type="spbot_planners::StraightLinePlanner"
     base_class_type="nav2_core::GlobalPlanner">
     <description>
-      RRT* global planner plugin for Nav2
+      Straight Line Planner
     </description>
   </class>
 </library>
