@@ -1,5 +1,6 @@
 #include "spbot_planners/rrt_star_planner.hpp"
 #include <pluginlib/class_list_macros.hpp>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp> 
 
 namespace spbot_planners
 {
@@ -51,11 +52,34 @@ nav_msgs::msg::Path RRTStarPlanner::createPlan(
   nav_msgs::msg::Path path;
   path.header = start.header;
 
-  // Stub: straight‐line fallback
-  path.poses.push_back(start);
-  path.poses.push_back(goal);
+    // parameters
+    double step = 0.05;                  // 5 cm between poses
+    auto dx     = goal.pose.position.x - start.pose.position.x;
+    auto dy     = goal.pose.position.y - start.pose.position.y;
+    double length = std::hypot(dx, dy);
+    int    n_steps = std::max<int>(1, std::round(length / step));
 
-  return path;
+    double yaw = std::atan2(dy, dx);     // heading along the segment
+
+    // orientation quaternion for every intermediate pose
+    tf2::Quaternion q_tf;
+    q_tf.setRPY(0.0, 0.0, yaw);               // roll, pitch, yaw
+    geometry_msgs::msg::Quaternion q = tf2::toMsg(q_tf);
+
+    for (int i = 0; i <= n_steps; ++i) {
+        double t = static_cast<double>(i) / n_steps;
+
+        geometry_msgs::msg::PoseStamped pose;
+        pose.header = path.header;
+        pose.pose.position.x = start.pose.position.x + t * dx;
+        pose.pose.position.y = start.pose.position.y + t * dy;
+        pose.pose.position.z = 0.0;
+        pose.pose.orientation = q;
+        path.poses.push_back(pose);
+    }
+    // last pose keeps the goal's final orientation if you wish:
+    path.poses.back().pose.orientation = goal.pose.orientation;
+    return path;
 }
 
 }  // namespace spbot_planners
